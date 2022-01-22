@@ -2,8 +2,8 @@ package com.bank.employees.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+
 import javax.persistence.*;
-import javax.websocket.OnError;
 import java.util.Date;
 
 @Entity(name = "Card")
@@ -38,5 +38,5 @@ public class Card {
 
     @JsonIgnore
     @OneToOne(mappedBy = "emp_card")
-    Employee employee;
+    private Employee employee;
 }

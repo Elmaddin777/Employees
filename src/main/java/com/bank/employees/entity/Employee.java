@@ -1,8 +1,6 @@
 package com.bank.employees.entity;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.*;
 
 import javax.persistence.*;
@@ -46,11 +44,11 @@ public class Employee{
     @JsonIgnore
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "department_id", referencedColumnName = "id", insertable = false, updatable = false)
-    Department department;
+    private Department department;
 
     @JsonIgnore
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "card_id", referencedColumnName = "id", insertable = false, updatable = false)
-    Card emp_card;
+    private Card emp_card;
 
 }

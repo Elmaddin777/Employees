@@ -19,7 +19,7 @@ import java.util.List;
 public class EmployeeController {
     private final EmployeeService employeeService;
 
-    @GetMapping(value = "all")
+    @GetMapping(value = "")
     public ResponseEntity<List<EmployeeDto>> getEmployees(
             @RequestParam(defaultValue = "0") Integer pageNo,
             @RequestParam(defaultValue = "5") Integer pageSize,
@@ -35,31 +35,31 @@ public class EmployeeController {
         return new ResponseEntity<>(employee, HttpStatus.OK);
     }
 
-    @GetMapping(value = "getFullNamesAsObjects")
+    @GetMapping(value = "fullnames/as-objects")
     public ResponseEntity<List<FullnamesDto>> getFullnamesAsObjects(){
         List<FullnamesDto> fullnames = employeeService.getFullnamesObjects();
         return new ResponseEntity<>(fullnames, HttpStatus.OK);
     }
 
-    @GetMapping(value = "getFullNamesAsList")
+    @GetMapping(value = "fullnames/as-list")
     public ResponseEntity<List<String>> getFullnamesAsList(){
         List<String> fullnames = employeeService.getFullNamesAsList();
         return new ResponseEntity<>(fullnames, HttpStatus.OK);
     }
 
-    @PostMapping(value = "create", consumes={"application/json"})
+    @PostMapping(value = "", consumes={"application/json"})
     public ResponseEntity<EmployeeDto> create(@RequestBody Employee emp){
         EmployeeDto epmDto = employeeService.create(emp);
         return new ResponseEntity<>(epmDto, HttpStatus.OK);
     }
 
-    @PutMapping(value = "update", consumes={"application/json"})
+    @PutMapping(value = "", consumes={"application/json"})
     public ResponseEntity<EmployeeDto> update(@RequestBody Employee emp){
         EmployeeDto epmDto = employeeService.update(emp);
         return new ResponseEntity<>(epmDto, HttpStatus.OK);
     }
 
-    @PostMapping(value ="{empId}/department/{deptId}")
+    @PostMapping(value ="{empId}/departments/{deptId}")
     public ResponseEntity<EmployeeDto> assignEmployeeToDepartment(
             @PathVariable long empId,
             @PathVariable long deptId){
@@ -69,24 +69,24 @@ public class EmployeeController {
         return new ResponseEntity<>(epmDto, HttpStatus.OK);
     }
 
-    @PutMapping(value ="card/{empId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value ="{empId}/cards", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<StatusDto> activateCard(@PathVariable Long empId){
         StatusDto statusDto =  employeeService.activateEmployeeCard(empId);
         return new ResponseEntity<>(statusDto, HttpStatus.OK);
     }
 
-    @DeleteMapping(value = "remove/{empId}")
+    @DeleteMapping(value = "{empId}")
     public void deleteEmployee(@PathVariable Long empId){
         employeeService.removeEmployee(empId);
     }
 
-    @GetMapping(value = "department/{deptName}")
+    @GetMapping(value = "departments/{deptName}")
     public List<EmployeeDto> getEmployeesByDepartmentName(@PathVariable String deptName){
         List<EmployeeDto> emps = employeeService.getEmployeesByDepartment(deptName);
         return emps;
     }
 
-    @GetMapping(value = "cardnumber/{cardNum}")
+    @GetMapping(value = "cards/{cardNum}")
     public ResponseEntity<EmployeeDto> getEmployeeByCardNumber(@PathVariable Long cardNum){
         EmployeeDto employeeDto =  employeeService.getEmployeeByCardNumber(cardNum);
         return new ResponseEntity<EmployeeDto>(employeeDto, HttpStatus.OK);

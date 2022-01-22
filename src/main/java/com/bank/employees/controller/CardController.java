@@ -21,7 +21,7 @@ public class CardController {
         return new ResponseEntity<List<Card>>(cards,HttpStatus.OK);
     }
 
-    @PostMapping(value = "createOrUpdate")
+    @PostMapping(value = "")
     public ResponseEntity<Card> createOrUpdate(@RequestBody Card card){
         Card currCard = cardService.saveOrUpdate(card);
         return new ResponseEntity<Card>(card, HttpStatus.OK);

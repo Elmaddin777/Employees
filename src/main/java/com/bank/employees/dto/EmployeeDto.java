@@ -30,7 +30,7 @@ public class EmployeeDto {
 
     private BigDecimal salary;
 
-    DepartmentDto department;
+    private DepartmentDto department;
 
-    CardDto emp_card;
+    private CardDto emp_card;
 }

@@ -17,7 +17,7 @@ public class DepartmentController {
     private final DepartmentService deptService;
 
     @GetMapping(value = "")
-    public ResponseEntity<List<Department>> getEmployees(){
+    public ResponseEntity<List<Department>> getDepartments(){
         List<Department> departments = deptService.getAllDepartments();
         return new ResponseEntity<List<Department>>(departments, HttpStatus.OK);
     }
